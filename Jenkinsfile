@@ -69,16 +69,12 @@ pipeline {
         withMaven(maven: 'MVN3', jdk: 'JDK8') {
           sh '''cd lutece-form-test
           mvn clean test -DcampOutPath="${WORKSPACE}/out"'''
+          junit 'lutece-form-test/target/surefire-reports/*.xml'
         }
       }
     }
   }
-  post {
-    always {
-      junit 'lutece-form-test/target/surefire-reports/*.xml'
-    }
-  }
-   environment {
+  environment {
     GIT_URL = sh (script: 'git config remote.origin.url', returnStdout: true).trim().replaceAll('https://','')
   }
 }
