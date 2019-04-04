@@ -53,9 +53,9 @@ pipeline {
         sh 'git add out'
         sh 'git commit -m "added camp configurations"'
         // CREDENTIALID
-        withCredentials([usernamePassword(credentialsId: 'github-user-password', passwordVariable: 'GITHUB_PASSWORD', usernameVariable: 'GITHUB_USERNAME')]) {
+        withCredentials([usernamePassword(credentialsId: 'github-user-password', passwordVariable: 'GITHUB_PASSWORD', usernameVariable: 'GITHUB_USER')]) {
           // REPOSITORY URL  
-          sh('git push https://${GITHUB_USERNAME}:${GITHUB_PASSWORD}@${GIT_URL}')
+          sh('git push https://${GITHUB_USER}:${GITHUB_PASSWORD}@${GIT_URL}')
 //            withEnv(["GITHUB_USER=${GIT_USERNAME}","GITHUB_PASSWORD=${GIT_PASSWORD}"]) {
             sh 'env'
             sh 'hub pull-request -m "Amplify pull request from build ${BUILD_NUMBER} on ${GIT_BRANCH}"'
