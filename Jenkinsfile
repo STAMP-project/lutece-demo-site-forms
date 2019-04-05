@@ -3,6 +3,13 @@ pipeline {
   agent any
   stages {
 
+    stage('build') {
+      steps {
+       sh '''cd template/lutece
+          mvn lutece:site-assembly'''
+      }
+    }
+
     stage('camp generate') {
       steps {
         sh 'camp generate -d . --all'
@@ -20,8 +27,12 @@ pipeline {
           sh '''cd lutece-form-test
           mvn clean test -DcampOutPath="${WORKSPACE}/out"'''
         }
-        junit 'lutece-form-test/target/surefire-reports/*.xml'
       }
+    }
+  }
+  post {
+    always {
+      junit 'lutece-form-test/target/surefire-reports/*.xml'
     }
   }
 }
