@@ -11,7 +11,7 @@ import static org.junit.Assert.fail;
 
 public class LuteceFormTest {
 
-	private static final String LUTECE_SITE_FORMS_URL = "http://localhost:8081/site-forms-demo/";
+	private static final String LUTECE_SITE_FORMS_URL = "http://lutece:8081/site-forms-demo/";
 
 	@Test
 	public void checkServerIsRunning() throws IOException {
