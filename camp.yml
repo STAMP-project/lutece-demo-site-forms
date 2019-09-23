@@ -23,7 +23,7 @@ components:
       docker:
         file: tests/Dockerfile
     tests:
-      command: mvn -f tests/pom.xml test
+      command: mvn test
       reports:
         format: junit
         location: target/surefire-reports
