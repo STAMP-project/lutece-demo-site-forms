@@ -12,9 +12,22 @@
 
 goals:
   running:
-    - Lutece
+    - IntegrationTests
 
 components:
+
+  tests:
+    provides_services: [ IntegrationTests ]
+    requires_services: [ Lutece ]
+    implementation:
+      docker:
+        file: tests/Dockerfile
+    tests:
+      command: mvn -f tests/pom.xml test
+      reports:
+        format: junit
+        location: target/surefire-reports
+        pattern: .xml
 
   lutece:
     provides_services: [Lutece]
