@@ -23,16 +23,9 @@ pipeline {
     }
     stage('execute tests') {
       steps {
-        withMaven(maven: 'MVN3', jdk: 'JDK8') {
-          sh '''cd lutece-form-test
-          mvn clean test -DcampOutPath="${WORKSPACE}/out"'''
-        }
+        sh 'camp execute'
       }
     }
   }
-  post {
-    always {
-      junit 'lutece-form-test/target/surefire-reports/*.xml'
-    }
-  }
+
 }
