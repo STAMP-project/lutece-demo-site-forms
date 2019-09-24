@@ -3,6 +3,13 @@ pipeline {
   agent any
   stages {
 
+    stage('build') {
+      steps {
+       sh '''cd template/lutece
+          mvn lutece:site-assembly'''
+      }
+    }
+
     stage('camp generate') {
       steps {
         sh 'camp generate -d . --all'
@@ -16,12 +23,10 @@ pipeline {
     }
     stage('execute tests') {
       steps {
-        withMaven(maven: 'MVN3', jdk: 'JDK8') {
-          sh '''cd lutece-form-test
-          mvn clean test -DcampOutPath="${WORKSPACE}/out"'''
-        }
-        junit 'lutece-form-test/target/surefire-reports/*.xml'
+        sh 'camp execute'
+	junit 'out/**/TEST*.xml'
       }
     }
   }
+
 }

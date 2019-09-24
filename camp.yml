@@ -8,17 +8,37 @@
 # This software may be modified and distributed under the terms
 # of the MIT license.  See the LICENSE file for details.
 #
-# 
+#
 
 goals:
   running:
-    - Lutece
+    - IntegrationTests
 
 components:
+
+  tests:
+    provides_services: [ IntegrationTests ]
+    requires_services: [ Lutece ]
+    implementation:
+      docker:
+        file: tests/Dockerfile
+    tests:
+      command: mvn test
+      reports:
+        format: junit
+        location: target/surefire-reports
+        pattern: .xml
 
   lutece:
     provides_services: [Lutece]
     requires_services: [MySQL]
+    variables:
+      version:
+          values: [ jdk8-openjdk, jdk8-corretto, jdk11-openjdk]
+          realization:
+            - targets: [ lutece/Dockerfile ]
+              pattern: "FROM tomcat:8.5.39-jre8"
+              replacements: [ "FROM tomcat:8.5.46-jdk8-openjdk", "FROM tomcat:8.5.46-jdk8-corretto", "FROM tomcat:8.5.46-jdk11-openjdk" ]
     implementation:
       docker:
         file: lutece/Dockerfile
@@ -27,11 +47,11 @@ components:
     provides_services: [MySQL]
     variables:
       version:
-          values: [ 5_5, 5_7 ]
+          values: [ 5_5, 5_6, 5_7 ,MDB_10.3]
           realization:
             - targets: [ mysql/Dockerfile ]
               pattern: "FROM mysql:5"
-              replacements: [ "FROM mysql:5.5", "FROM mysql:5.7" ]
+              replacements: [ "FROM mysql:5.5", "FROM mysql:5.6", "FROM mysql:5.7" , "FROM mariadb:10.3"]
     implementation:
       docker:
         file: mysql/Dockerfile
