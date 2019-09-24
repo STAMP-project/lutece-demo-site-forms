@@ -24,6 +24,7 @@ pipeline {
     stage('execute tests') {
       steps {
         sh 'camp execute'
+	junit 'out/**/TEST*.xml'
       }
     }
   }
