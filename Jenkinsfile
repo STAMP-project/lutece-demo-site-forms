@@ -18,7 +18,8 @@ pipeline {
     stage('camp realize') {
       steps {
         sh 'camp realize -d .'
-        zip zipFile: 'conf.zip', archive: true, dir: 'out'
+        zip zipFile: 'testconf.zip', archive: true, dir: 'out', glob: '**/*.yml'
+        zip zipFile: 'dockerfiles.zip', archive: true, dir: 'out', glob: '**/Dockerfile'
       }
     }
     stage('execute tests') {
