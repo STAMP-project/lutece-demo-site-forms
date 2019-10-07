@@ -12,7 +12,7 @@ pipeline {
 
     stage('camp generate') {
       steps {
-        sh 'camp generate -d . --coverage'
+        sh 'camp generate -d . --all'
       }
     }
     stage('camp realize') {
