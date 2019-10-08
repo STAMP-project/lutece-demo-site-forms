@@ -39,7 +39,8 @@ components:
           realization:
             - targets: [ lutece/Dockerfile ]
               pattern: "FROM tomcat:8.5.39-jre8"
-              replacements: [ "FROM tomcat:8.5.46-jdk8-openjdk", "FROM tomcat:8.5.46-jdk8-corretto", "FROM tomcat:8.5.46-jdk11-openjdk" ]
+#              replacements: [ "FROM tomcat:8.5.46-jdk8-openjdk", "FROM tomcat:8.5.46-jdk8-corretto", "FROM tomcat:8.5.46-jdk11-openjdk" ]
+              replacements: [ "FROM tomcat:8.5.46-jdk8-openjdk", "FROM tomcat:8.5.46-jdk11-openjdk" ]
     implementation:
       docker:
         file: lutece/Dockerfile
