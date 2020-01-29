@@ -34,12 +34,10 @@ components:
     requires_services: [MySQL]
     variables:
       version:
-#          values: [ jdk8-openjdk, jdk8-corretto, jdk11-openjdk]
           values: [ jdk8-openjdk, jdk11-openjdk]
           realization:
             - targets: [ lutece/Dockerfile ]
               pattern: "FROM tomcat:8.5.39-jre8"
-#              replacements: [ "FROM tomcat:8.5.46-jdk8-openjdk", "FROM tomcat:8.5.46-jdk8-corretto", "FROM tomcat:8.5.46-jdk11-openjdk" ]
               replacements: [ "FROM tomcat:8.5.46-jdk8-openjdk", "FROM tomcat:8.5.46-jdk11-openjdk" ]
     implementation:
       docker:
@@ -49,12 +47,10 @@ components:
     provides_services: [MySQL]
     variables:
       version:
-#          values: [ 5_5, 5_6, 5_7 ,MDB_10.3,MDB_10.4]
           values: [ 5_5, 5_6, 5_7 ]
           realization:
             - targets: [ mysql/Dockerfile ]
               pattern: "FROM mysql:5"
-#              replacements: [ "FROM mysql:5.5", "FROM mysql:5.6", "FROM mysql:5.7" , "FROM mariadb:10.3", "FROM mariadb:10.4"]
               replacements: [ "FROM mysql:5.5", "FROM mysql:5.6", "FROM mysql:5.7"]
     implementation:
       docker:
